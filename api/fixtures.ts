@@ -49,7 +49,7 @@ const run = async () => {
             artist: gagarinaArtist._id,
             title: "Inhale",
             year: 2022,
-            image: "fixtures/Inhale.jpeg",
+            image: "fixtures/Inhail.jpeg",
         },);
     
  await Track.create({
