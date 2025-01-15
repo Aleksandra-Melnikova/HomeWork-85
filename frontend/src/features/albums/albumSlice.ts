@@ -5,12 +5,12 @@ import { RootState } from "../../app/store.ts";
 import {Album} from "../../types";
 
 interface IProductsState {
-  albums: Album[];
+  albums: Album | null;
   fetchLoading: boolean;
 }
 
 const initialState: IProductsState = {
-  albums: [],
+  albums: null,
   fetchLoading: false,
 };
 
@@ -30,6 +30,7 @@ export const albumSlice = createSlice({
       })
       .addCase(fetchAlbums.fulfilled, (state, { payload: albums }) => {
         state.fetchLoading = false;
+        if(albums)
         state.albums = albums;
       })
       .addCase(fetchAlbums.rejected, (state) => {

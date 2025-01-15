@@ -5,12 +5,12 @@ import { RootState } from "../../app/store.ts";
 import {Track} from "../../types";
 
 interface IProductsState {
-  tracks: Track[];
+  tracks: Track | null;
   fetchLoading: boolean;
 }
 
 const initialState: IProductsState = {
-  tracks: [],
+  tracks: null,
   fetchLoading: false,
 };
 

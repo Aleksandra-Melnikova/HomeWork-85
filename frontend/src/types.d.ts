@@ -5,20 +5,26 @@ export interface Artist {
 }
 
 
-export interface  Album {
-  _id: string;
-  artist: ArtistInterface;
-  title: string;
-  year: number;
-  image: string | null;
+export interface  Album
+{albums: { _id: string;
+    artist: ArtistInterface;
+    title: string;
+    year: number;
+    image: string | null}[],
+    artist:Artist
 }
 
-export interface  Track {
-  _id: string;
-  album: AlbumInterface;
-  name: string;
-  time: string;
-  trackNumber: number;
+export interface  Track  {tracks:{_id: string;
+    album: AlbumInterface;
+    name: string;
+    time: string;
+    trackNumber: number;}[],
+    album: { _id: string;
+        artist: ArtistInterface;
+        title: string;
+        year: number;
+        image: string | null},
+    artist: Artist
 }
 //
 // export interface RegisterResponse {
