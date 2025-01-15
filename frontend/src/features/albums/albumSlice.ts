@@ -1,8 +1,7 @@
-
 import { createSlice } from "@reduxjs/toolkit";
-import {fetchAlbums} from "./albumsThunk.ts";
+import { fetchAlbums } from "./albumsThunk.ts";
 import { RootState } from "../../app/store.ts";
-import {Album} from "../../types";
+import { Album } from "../../types";
 
 interface IProductsState {
   albums: Album | null;
@@ -18,7 +17,6 @@ export const selectAlbums = (state: RootState) => state.albums.albums;
 export const selectFetchLoading = (state: RootState) =>
   state.albums.fetchLoading;
 
-
 export const albumSlice = createSlice({
   name: "albums",
   initialState,
@@ -30,13 +28,11 @@ export const albumSlice = createSlice({
       })
       .addCase(fetchAlbums.fulfilled, (state, { payload: albums }) => {
         state.fetchLoading = false;
-        if(albums)
-        state.albums = albums;
+        if (albums) state.albums = albums;
       })
       .addCase(fetchAlbums.rejected, (state) => {
         state.fetchLoading = false;
-      })
-
+      });
   },
 });
 

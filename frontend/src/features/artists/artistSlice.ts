@@ -1,8 +1,7 @@
-
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchArtists} from "./artistsThunk.ts";
+import { fetchArtists } from "./artistsThunk.ts";
 import { RootState } from "../../app/store.ts";
-import {Artist} from "../../types";
+import { Artist } from "../../types";
 
 interface IProductsState {
   artists: Artist[];
@@ -17,7 +16,6 @@ const initialState: IProductsState = {
 export const selectArtists = (state: RootState) => state.artists.artists;
 export const selectFetchLoading = (state: RootState) =>
   state.artists.fetchLoading;
-
 
 export const artistSlice = createSlice({
   name: "artists",
@@ -34,8 +32,7 @@ export const artistSlice = createSlice({
       })
       .addCase(fetchArtists.rejected, (state) => {
         state.fetchLoading = false;
-      })
-
+      });
   },
 });
 

@@ -1,8 +1,7 @@
-
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchTracks} from "./tracksThunk.ts";
+import { fetchTracks } from "./tracksThunk.ts";
 import { RootState } from "../../app/store.ts";
-import {Track} from "../../types";
+import { Track } from "../../types";
 
 interface IProductsState {
   tracks: Track | null;
@@ -17,7 +16,6 @@ const initialState: IProductsState = {
 export const selectTracks = (state: RootState) => state.tracks.tracks;
 export const selectFetchLoading = (state: RootState) =>
   state.tracks.fetchLoading;
-
 
 export const trackSlice = createSlice({
   name: "tracks",
@@ -34,8 +32,7 @@ export const trackSlice = createSlice({
       })
       .addCase(fetchTracks.rejected, (state) => {
         state.fetchLoading = false;
-      })
-
+      });
   },
 });
 
