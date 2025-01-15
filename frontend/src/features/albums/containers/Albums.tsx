@@ -3,35 +3,47 @@ import Grid from "@mui/material/Grid2";
 import { CircularProgress, Typography } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks.ts";
 import { useEffect } from "react";
-import {selectFetchLoading} from "../albumSlice.ts";
+import {selectFetchLoading} from "../../tracks/trackSlice.ts";
 import AlbumItem from "../components/AlbumItem.tsx";
+import { useSearchParams} from "react-router-dom";;
+import {selectArtists} from "../../artists/artistSlice.ts";
+import {Album} from "../../../types";
 import {selectAlbums} from "../albumSlice.ts";
-import { useSearchParams} from "react-router-dom";
 import {fetchAlbums} from "../albumsThunk.ts";
+import * as React from "react";
 
-const Albums = () => {
-  const dispatch = useAppDispatch();
-  const albums = useAppSelector(selectAlbums);
+interface Props {
+    artistName: string;
+}
+
+const Albums:React.FC<Props> = ({artistName}) => {
+  // const dispatch = useAppDispatch();
+  const albums:Album[] = useAppSelector(selectAlbums);
   const isFetchLoading = useAppSelector(selectFetchLoading);
+  // const artists = useAppSelector(selectArtists);
 
-    const [searchParams, setSearchParams] = useSearchParams();
-    const params = searchParams.get("artist");
+  //   const [searchParams, setSearchParams] = useSearchParams();
+  //   const params = searchParams.get("artist");
+  //   console.log(params);
+  //
+  //
+  // useEffect(() => {
+  //     if(params){
+  //         dispatch(fetchAlbums(params))
+  //     }
+  // }, [dispatch]);
+  // let artistName = '';
+  // artists.map(item => {
+  //     if(item._id === params)
+  //      artistName = item.name});
 
-
-  useEffect(() => {
-      if(params){
-          dispatch(fetchAlbums(params))
-          setSearchParams(params);
-      }
-  }, [dispatch]);
-  console.log(albums);
 
 
   return (
       <Grid container direction={"column"} spacing={2}>
         <Grid container justifyContent="space-between" alignItems="center">
           <Grid>
-            <Typography style={{marginLeft:"30px", marginTop:"20px"}} variant="h4">Albums</Typography>
+            <Typography style={{marginLeft:"30px", marginTop:"20px"}} variant="h4">Albums of {artistName} </Typography>
           </Grid>
           <Grid>
           </Grid>

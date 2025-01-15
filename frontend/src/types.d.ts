@@ -13,25 +13,27 @@ export interface  Album {
   image: string | null;
 }
 
-export interface User {
+export interface  Track {
   _id: string;
-  username: string;
-  token: string;
-}
-
-export interface RegisterResponse {
-  user: User;
-  message: string;
-}
-
-export interface ValidationError {
-  errors: {
-    [key: string]: {
-      name: string;
-      message: string;
-    }
-  },
-  message: string;
+  album: AlbumInterface;
   name: string;
-  _message: string;
+  time: string;
+  trackNumber: number;
 }
+//
+// export interface RegisterResponse {
+//   user: User;
+//   message: string;
+// }
+//
+// export interface ValidationError {
+//   errors: {
+//     [key: string]: {
+//       name: string;
+//       message: string;
+//     }
+//   },
+//   message: string;
+//   name: string;
+//   _message: string;
+// }

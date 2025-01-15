@@ -24,7 +24,7 @@ const AlbumItem: React.FC<Props> = ({title, year, image, id}) => {
 
     return (
         <Grid size={{ xs: 10, sm: 8, md: 5, lg: 4 }}>
-            <Card component={Link} to={"/albums?artist=" + id} style={{textDecoration:"none"}}>
+            <Card component={Link} to={"/tracks?album=" + id} style={{textDecoration:"none"}}>
                 <CardHeader title={title}/>
                 <CardContent>
                     <Typography variant="body2" color="textSecondary" component="p">Year:{year}</Typography>
