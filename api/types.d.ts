@@ -1,3 +1,5 @@
+
+
 export interface ArtistInterface {
     _id: string;
     name: string;
@@ -11,9 +13,19 @@ export interface  AlbumInterface {
     _id: string;
     artist: ArtistInterface;
     title: string;
-    year: string;
+    year: number;
     image: string | null;
 }
+
+export interface  AlbumInterfaceNew {
+    _id: Types.ObjectId;
+    artist: Types.ObjectId;
+    title: string;
+    year: number;
+    image: string | null | undefined;
+    trackNumber: number;
+}
+
 
 export type AlbumInterfaceWithoutId = Omit<AlbumInterface, '_id'>
 

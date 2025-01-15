@@ -2,23 +2,44 @@ import express from "express";
 import Album from "../models/Album";
 import {imagesUpload} from "../multer";
 import Artist from "../models/Artist";
-import {AlbumInterfaceWithoutId} from "../types";
+import {AlbumInterfaceNew, AlbumInterfaceWithoutId} from "../types";
+import Track from "../models/Track";
 const albumsRouter = express.Router();
 
 
 albumsRouter.get('/', async (req, res, next) => {
     try {
+        const albumNew:AlbumInterfaceNew[] = [];
         const idQuery = req.query.artist as string;
         if(idQuery){
             const artist = await Artist.findById({_id:idQuery});
-            console.log(artist);
             const albums = await Album.find({artist: idQuery}).sort({year: -1});
+            const arrayNew:number[] = [];
+            for(let i=0; i<albums.length; i++){
+                const array = await Track.find({album: albums[i]._id});
+                arrayNew.push(array.length);
+            }
+
+            for(let i=0; i<arrayNew.length; i++){
+                for (let j=0; j<albums.length; j++){
+                    if(i===j){
+                        albumNew.push({
+                            _id:albums[j]._id,
+                            artist: albums[j].artist,
+                            title: albums[j].title,
+                            year: albums[j].year,
+                            image: albums[j].image,
+                            trackNumber: arrayNew[i],
+                        });
+                    }
+                }
+            }
             if(albums.length === 0){
                 res.status(404).send({error:"Not found"});
             }
             else{
                 res.send({
-                    albums: albums,
+                    albums: albumNew,
                     artist: artist
                 });
             }}
