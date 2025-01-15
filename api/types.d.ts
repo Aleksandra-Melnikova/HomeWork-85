@@ -22,6 +22,7 @@ export interface  TrackInterface {
     album: AlbumInterface;
     name: string;
     time: string;
+    trackNumber: number;
 }
 
 export type TrackInterfaceWithoutId = Omit<TrackInterface, '_id'>

@@ -10,12 +10,17 @@ albumsRouter.get('/', async (req, res, next) => {
     try {
         const idQuery = req.query.artist as string;
         if(idQuery){
-            const albums = await Album.find({artist: idQuery});
+            const artist = await Artist.findById({_id:idQuery});
+            console.log(artist);
+            const albums = await Album.find({artist: idQuery}).sort({year: -1});
             if(albums.length === 0){
                 res.status(404).send({error:"Not found"});
             }
             else{
-                res.send(albums);
+                res.send({
+                    albums: albums,
+                    artist: artist
+                });
             }}
         else{
            const albums = await Album.find();

@@ -3,6 +3,7 @@ import Album from "../models/Album";
 import {imagesUpload} from "../multer";
 import {TrackInterfaceWithoutId} from "../types";
 import Track from "../models/Track";
+import Artist from "../models/Artist";
 const tracksRouter = express.Router();
 
 
@@ -11,12 +12,18 @@ tracksRouter.get('/', async (req, res, next) => {
         const idQueryAlbum = req.query.album as string;
         const idQueryArtist = req.query.artist as string;
         if(idQueryAlbum){
-            const tracks = await Track.find({album: idQueryAlbum});
+            const album = await Album.findById({_id:idQueryAlbum});
+           const artist = await Artist.findById({_id:album?.artist})
+            const tracks = await Track.find({album: idQueryAlbum}).sort({trackNumber: 1});
             if(tracks.length === 0){
                 res.status(404).send({error:"Not found"});
             }
             else{
-                res.send(tracks);
+                res.send({
+                    tracks: tracks,
+                    album: album,
+                    artist: artist
+                });
             }}
         else if(idQueryArtist){
             const albums = await Album.find({artist: idQueryArtist });
@@ -53,6 +60,7 @@ tracksRouter.post('/', imagesUpload.single('image'), async (req, res, next) => {
         album: req.body.album,
         name: req.body.name,
         time: req.body.time,
+        trackNumber: req.body.trackNumber
     };
 
     try {

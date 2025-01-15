@@ -47,9 +47,9 @@ const run = async () => {
             image: "fixtures/clouds.jpeg",
         }, {
             artist: gagarinaArtist._id,
-            title: "Inhale",
+            title: "Ihnail",
             year: 2022,
-            image: "fixtures/Inhail.jpeg",
+            image: "fixtures/Ihnail.jpeg",
         },);
     
  await Track.create({
