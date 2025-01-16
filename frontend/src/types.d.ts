@@ -11,7 +11,7 @@ export interface Album {
     title: string;
     year: number;
     image: string | null;
-    numberTracks: number;
+    trackNumber: number;
   }[];
   artist: Artist;
 }

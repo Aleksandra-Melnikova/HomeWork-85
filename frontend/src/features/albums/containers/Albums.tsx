@@ -52,7 +52,7 @@ const Albums = () => {
                     title={album.title}
                     image={album.image}
                     year={album.year}
-                    trackNumber={album.numberTracks}
+                    trackNumber={album.trackNumber}
                   />
                 ))}
               </>
