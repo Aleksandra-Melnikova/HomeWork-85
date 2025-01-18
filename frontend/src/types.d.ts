@@ -4,6 +4,18 @@ export interface Artist {
   image: string;
 }
 
+export interface TrackHistory {
+  _id: string;
+  user: User;
+  track: {    _id: string;
+    album: AlbumInterface;
+    name: string;
+    time: string;
+    trackNumber: number;};
+  datetime: string;
+  artistName: string;
+}
+
 export interface Album {
   albums: {
     _id: string;
@@ -68,5 +80,10 @@ export interface LoginMutation {
 export interface User {
   _id: string;
   username: string;
+  token: string;
+}
+
+export interface TrackHistoryPost{
+  Id: string;
   token: string;
 }

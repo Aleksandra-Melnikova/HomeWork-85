@@ -1,4 +1,4 @@
-import { AppBar, styled, Toolbar, Typography } from '@mui/material';
+import {AppBar, Button, styled, Toolbar, Typography} from '@mui/material';
 import { Link as NavLink } from "react-router-dom";
 import { selectUser } from '../../../features/users/UserSlice.ts';
 import { useAppSelector } from '../../../app/hooks.ts';
@@ -21,12 +21,13 @@ const AppToolbar = () => {
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
           <Link to="/">Spotify</Link>
         </Typography>
+        {user ?  <Button style={{marginInline:'20px'}} component={NavLink} to="/trackHistory" color="inherit">
+          Track history
+        </Button>:null}
         {user ?
          <UserMenu user={user}/>
-          // тут будет часть меню для залогиненного пользователя
          :
           <AnonimusMenu/>
-          // тут будет часть меню для анонимного
         }
       </Toolbar>
     </AppBar>
