@@ -1,5 +1,5 @@
 import Grid from "@mui/material/Grid2";
-import { Button, Card, CardContent, Typography } from "@mui/material";
+import { Card, CardContent, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks.ts";
 import { selectUser } from "../../users/UserSlice.ts";
@@ -14,9 +14,10 @@ interface Props {
   trackNumber: number;
   id: string;
   time: string;
+  link :string
 }
 
-const TrackItem: React.FC<Props> = ({ trackNumber, name, time, id }) => {
+const TrackItem: React.FC<Props> = ({ trackNumber, name, time, id, link }) => {
   const user = useAppSelector(selectUser);
   const dispatch = useAppDispatch();
   const error = useAppSelector(selectCreateError);
@@ -63,13 +64,16 @@ const TrackItem: React.FC<Props> = ({ trackNumber, name, time, id }) => {
               {time}
             </Typography>
             {user ? (
-              <Button
-                type={"button"}
+
+              <Link
+                  to={link}
                 onClick={() => onPlay(id)}
                 style={{ paddingTop: "4px", marginInline: "10px" }}
-              >
+                className={'tube'}
+               >
                 <PlayArrowIcon fontSize={"medium"} />
-              </Button>
+              </Link>
+
             ) : null}
           </CardContent>
         </Card>

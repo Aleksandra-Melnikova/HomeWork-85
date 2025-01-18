@@ -34,6 +34,7 @@ export interface Track {
     name: string;
     time: string;
     trackNumber: number;
+    linkYouTube: string;
   }[];
   album: {
     _id: string;

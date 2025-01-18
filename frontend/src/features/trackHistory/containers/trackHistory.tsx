@@ -25,6 +25,7 @@ const TrackHistory = () => {
   useEffect(() => {
     dispatch(fetchTrackHistory());
   }, [dispatch]);
+  console.log(trackHistory)
 
   return (
     <Grid container direction={"column"} spacing={2}>
