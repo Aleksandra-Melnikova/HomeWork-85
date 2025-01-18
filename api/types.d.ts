@@ -17,15 +17,6 @@ export interface  AlbumInterface {
     image: string | null;
 }
 
-export interface  AlbumInterfaceNew {
-    _id: Types.ObjectId;
-    artist: Types.ObjectId;
-    title: string;
-    year: number;
-    image: string | null | undefined;
-    trackNumber: number;
-}
-
 
 export type AlbumInterfaceWithoutId = Omit<AlbumInterface, '_id'>
 
