@@ -7,13 +7,18 @@ const TrackHistorySchema = new mongoose.Schema({
         required: [true,'User is required'],
     },
     track: {
-        type: String,
+        type: Schema.Types.ObjectId,
+        ref: "Track",
         required: true,
     },
     datetime: {
         type: String,
         default:()=>new Date().toISOString(),
     },
+    artistName:{
+        type: String,
+        required: true,
+    }
 });
 
 const TrackHistory = mongoose.model("TrackHistory", TrackHistorySchema);
