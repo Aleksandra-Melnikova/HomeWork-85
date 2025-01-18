@@ -1,39 +1,33 @@
-import React, { useState } from 'react';
-import { Button, Menu, MenuItem } from '@mui/material';
-import { User } from '../../../types';
-import { unsetUser } from '../../../features/users/UserSlice.ts';
-import { useAppDispatch } from '../../../app/hooks.ts';
-import { logout } from '../../../features/users/UserThunk.ts';
-
+import React, { useState } from "react";
+import { Button, Menu, MenuItem } from "@mui/material";
+import { User } from "../../../types";
+import { unsetUser } from "../../../features/users/UserSlice.ts";
+import { useAppDispatch } from "../../../app/hooks.ts";
+import { logout } from "../../../features/users/UserThunk.ts";
 
 interface Props {
   user: User;
 }
 
-
-const UserMenu: React.FC<Props> = ({user}) => {
+const UserMenu: React.FC<Props> = ({ user }) => {
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
- const dispatch = useAppDispatch();
-
+  const dispatch = useAppDispatch();
 
   const handleClose = () => {
     setAnchorEl(null);
   };
 
-  const HandleLogout = ()=>{
+  const HandleLogout = () => {
     dispatch(logout());
     dispatch(unsetUser());
-  }
+  };
 
   return (
     <>
-      <Button
-        onClick={handleClick}
-        color="inherit"
-      >
+      <Button onClick={handleClick} color="inherit">
         Hello, {user.username}
       </Button>
       <Menu
@@ -44,12 +38,10 @@ const UserMenu: React.FC<Props> = ({user}) => {
       >
         <MenuItem>Profile</MenuItem>
         <MenuItem>My account</MenuItem>
-        <MenuItem onClick = {HandleLogout}>Logout</MenuItem>
+        <MenuItem onClick={HandleLogout}>Logout</MenuItem>
       </Menu>
     </>
   );
 };
-
-
 
 export default UserMenu;

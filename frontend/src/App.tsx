@@ -20,12 +20,12 @@ const App = () => {
         <Container maxWidth="xl">
           <Routes>
             <Route path="/" element={<Artists />} />
-              <Route path="/register" element={<RegisrerPage/>} />
-              <Route path="/login" element={<LoginPage/>} />
+            <Route path="/register" element={<RegisrerPage />} />
+            <Route path="/login" element={<LoginPage />} />
             <Route path="/artists" element={<Artists />} />
             <Route path="/albums" element={<Albums />} />
             <Route path="/tracks" element={<Tracks />} />
-              <Route path="/trackHistory" element={<TrackHistory />} />
+            <Route path="/trackHistory" element={<TrackHistory />} />
             <Route path="*" element={<h1>Not found</h1>} />
           </Routes>
         </Container>

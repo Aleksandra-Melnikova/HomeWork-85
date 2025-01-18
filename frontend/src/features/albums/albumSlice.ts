@@ -4,7 +4,7 @@ import { RootState } from "../../app/store.ts";
 import { Album } from "../../types";
 
 interface IProductsState {
-  albums: Album | null;
+  albums: Album[] | null;
   fetchLoading: boolean;
 }
 

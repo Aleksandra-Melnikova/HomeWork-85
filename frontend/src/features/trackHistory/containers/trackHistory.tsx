@@ -3,17 +3,27 @@ import { CircularProgress, Typography } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks.ts";
 import { useEffect } from "react";
 import TrackHistoryItem from "../components/TrackHistoryItem.tsx";
-import {selectFetchLoading, selectTracksHistory} from "../trackHistorySlice.ts";
-import {fetchTrackHistory} from "../trackHistoryThunk.ts";
+import {
+  selectFetchLoading,
+  selectTracksHistory,
+} from "../trackHistorySlice.ts";
+import { fetchTrackHistory } from "../trackHistoryThunk.ts";
+import { selectUser } from "../../users/UserSlice.ts";
+import { useNavigate } from "react-router-dom";
 
 const TrackHistory = () => {
   const dispatch = useAppDispatch();
   const trackHistory = useAppSelector(selectTracksHistory);
   const isFetchLoading = useAppSelector(selectFetchLoading);
+  const user = useAppSelector(selectUser);
+  const navigate = useNavigate();
 
+  if (user === null) {
+    navigate("/");
+  }
 
   useEffect(() => {
-      dispatch(fetchTrackHistory());
+    dispatch(fetchTrackHistory());
   }, [dispatch]);
 
   return (
@@ -45,7 +55,8 @@ const TrackHistory = () => {
                     id={track._id}
                     datetime={track.datetime}
                     artistName={track.artistName}
-                   name={track.track.name}/>
+                    name={track.track.name}
+                  />
                 ))}
               </>
             )}

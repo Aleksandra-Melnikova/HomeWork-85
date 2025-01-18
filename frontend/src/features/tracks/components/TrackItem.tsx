@@ -1,11 +1,13 @@
 import Grid from "@mui/material/Grid2";
-import {Button, Card, CardContent, Typography} from "@mui/material";
+import { Button, Card, CardContent, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
-import {useAppDispatch, useAppSelector} from "../../../app/hooks.ts";
-import {selectUser} from "../../users/UserSlice.ts";
-import PlayArrowIcon from '@mui/icons-material/PlayArrow';
-import {createTrackHistory} from "../../trackHistory/trackHistoryThunk.ts";
-import {TrackHistoryPost} from "../../../types";
+import { useAppDispatch, useAppSelector } from "../../../app/hooks.ts";
+import { selectUser } from "../../users/UserSlice.ts";
+import PlayArrowIcon from "@mui/icons-material/PlayArrow";
+import { createTrackHistory } from "../../trackHistory/trackHistoryThunk.ts";
+import { TrackHistoryPost } from "../../../types";
+import { selectCreateError } from "../../trackHistory/trackHistorySlice.ts";
+import { toast } from "react-toastify/unstyled";
 
 interface Props {
   name: string;
@@ -17,17 +19,21 @@ interface Props {
 const TrackItem: React.FC<Props> = ({ trackNumber, name, time, id }) => {
   const user = useAppSelector(selectUser);
   const dispatch = useAppDispatch();
+  const error = useAppSelector(selectCreateError);
+  if (error) {
+    toast.error(error?.errors.track.message);
+  }
 
-  const onPlay = (id:string) => {
-    if(user){
-      const Obj: TrackHistoryPost={
+  const onPlay = (id: string) => {
+    if (user) {
+      const Obj: TrackHistoryPost = {
         Id: id,
-        token: user.token
-      }
-      console.log(Obj);
+        token: user.token,
+      };
       dispatch(createTrackHistory(Obj));
     }
-  }
+  };
+
   return (
     <Grid marginBottom={"20px"} size={{ xs: 12, sm: 12, md: 10, lg: 8 }}>
       <Grid style={{ width: "70%" }}>
@@ -56,7 +62,15 @@ const TrackItem: React.FC<Props> = ({ trackNumber, name, time, id }) => {
             >
               {time}
             </Typography>
-            {user?<Button type={'button'} onClick={()=>onPlay(id)} style={{paddingTop:"4px", marginInline:"10px"}}><PlayArrowIcon fontSize={'medium'}/></Button>:null}
+            {user ? (
+              <Button
+                type={"button"}
+                onClick={() => onPlay(id)}
+                style={{ paddingTop: "4px", marginInline: "10px" }}
+              >
+                <PlayArrowIcon fontSize={"medium"} />
+              </Button>
+            ) : null}
           </CardContent>
         </Card>
       </Grid>

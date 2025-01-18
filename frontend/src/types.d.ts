@@ -7,25 +7,24 @@ export interface Artist {
 export interface TrackHistory {
   _id: string;
   user: User;
-  track: {    _id: string;
+  track: {
+    _id: string;
     album: AlbumInterface;
     name: string;
     time: string;
-    trackNumber: number;};
+    trackNumber: number;
+  };
   datetime: string;
   artistName: string;
 }
 
 export interface Album {
-  albums: {
-    _id: string;
-    artist: ArtistInterface;
-    title: string;
-    year: number;
-    image: string | null;
-    trackNumber: number;
-  }[];
-  artist: Artist;
+  _id: string;
+  artist: ArtistInterface;
+  title: string;
+  year: number;
+  image: string | null;
+  trackNumber: number;
 }
 
 export interface Track {
@@ -56,8 +55,8 @@ export interface ValidationError {
     [key: string]: {
       name: string;
       message: string;
-    }
-  },
+    };
+  };
   message: string;
   name: string;
   _message: string;
@@ -83,7 +82,7 @@ export interface User {
   token: string;
 }
 
-export interface TrackHistoryPost{
+export interface TrackHistoryPost {
   Id: string;
   token: string;
 }
