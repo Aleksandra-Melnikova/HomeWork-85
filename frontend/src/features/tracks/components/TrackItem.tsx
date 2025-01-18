@@ -14,7 +14,7 @@ interface Props {
   trackNumber: number;
   id: string;
   time: string;
-  link :string
+  link: string;
 }
 
 const TrackItem: React.FC<Props> = ({ trackNumber, name, time, id, link }) => {
@@ -64,16 +64,14 @@ const TrackItem: React.FC<Props> = ({ trackNumber, name, time, id, link }) => {
               {time}
             </Typography>
             {user ? (
-
               <Link
-                  to={link}
+                to={link}
                 onClick={() => onPlay(id)}
                 style={{ paddingTop: "4px", marginInline: "10px" }}
-                className={'tube'}
-               >
+                className={"tube"}
+              >
                 <PlayArrowIcon fontSize={"medium"} />
               </Link>
-
             ) : null}
           </CardContent>
         </Card>

@@ -3,7 +3,7 @@ import { CircularProgress, Typography } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks.ts";
 import { useEffect } from "react";
 import TrackItem from "../components/TrackItem.tsx";
-import {selectFetchLoading, selectTracks} from "../trackSlice.ts";
+import { selectFetchLoading, selectTracks } from "../trackSlice.ts";
 import { fetchTracks } from "../tracksThunk.ts";
 import { useLocation } from "react-router-dom";
 
@@ -20,7 +20,6 @@ const Tracks = () => {
       dispatch(fetchTracks(params));
     }
   }, [dispatch]);
-
 
   return (
     <Grid container direction={"column"} spacing={2}>
