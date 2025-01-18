@@ -17,6 +17,10 @@ const TrackSchema = new mongoose.Schema({
     trackNumber:{
         type: Number,
         required: true,
+    },
+    linkYouTube:{
+        type: String,
+        default: null,
     }
 });
 

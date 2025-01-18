@@ -60,7 +60,8 @@ tracksRouter.post('/', imagesUpload.single('image'), async (req, res, next) => {
         album: req.body.album,
         name: req.body.name,
         time: req.body.time,
-        trackNumber: req.body.trackNumber
+        trackNumber: req.body.trackNumber,
+        linkYouTube: req.body.linkYouTube,
     };
 
     try {

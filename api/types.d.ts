@@ -26,6 +26,7 @@ export interface  TrackInterface {
     name: string;
     time: string;
     trackNumber: number;
+    linkYouTube: string;
 }
 
 export type TrackInterfaceWithoutId = Omit<TrackInterface, '_id'>
