@@ -9,7 +9,7 @@ import {Error} from "mongoose";
 
 const trackHistoryRouter = express.Router();
 trackHistoryRouter.post('/', async (req, res, next) => {
-    const token = req.get('Authorization');
+    const token = req.get('Authentication');
     if (!token) {
         res.status(401).send({error: 'No token present'});
         return

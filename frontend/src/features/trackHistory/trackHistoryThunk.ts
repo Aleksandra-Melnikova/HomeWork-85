@@ -27,7 +27,7 @@ export const createTrackHistory = createAsyncThunk<
       await axiosApi.post(
         "/track_history",
         { track: TrackHistoryPost.Id },
-        { headers: { Authorization: TrackHistoryPost.token } },
+        { headers: {  Authentication: TrackHistoryPost.token } },
       );
     } catch (error) {
       if (isAxiosError(error) && error.status === 400 && error.response) {
