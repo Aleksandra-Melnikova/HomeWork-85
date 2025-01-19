@@ -21,6 +21,7 @@ const Albums = () => {
       dispatch(fetchAlbums(params));
     }
   }, [dispatch]);
+
   return (
     <Grid container direction={"column"} spacing={2}>
       <Grid container justifyContent="space-between" alignItems="center">
@@ -30,7 +31,7 @@ const Albums = () => {
               style={{ marginLeft: "30px", marginTop: "20px" }}
               variant="h4"
             >
-              Albums of {albums[0].artist.name}
+              Albums of {albums[0].album.artist.name}
             </Typography>
           ) : null}
         </Grid>
@@ -42,17 +43,18 @@ const Albums = () => {
           <CircularProgress />
         ) : (
           <>
-            {albums?.length === 0 && !isFetchLoading ? (
+            {!albums || (albums?.length === 0 && !isFetchLoading) ? (
               <Typography variant="h6">No artists yet</Typography>
             ) : (
               <>
                 {albums?.map((album) => (
                   <AlbumItem
-                    key={album._id}
-                    id={album._id}
-                    title={album.title}
-                    image={album.image}
-                    year={album.year}
+                    key={album.album._id}
+                    id={album.album._id}
+                    title={album.album.title}
+                    image={album.album.image}
+                    year={album.album.year}
+                    tracks={album.trackNumber}
                   />
                 ))}
               </>

@@ -38,11 +38,7 @@ const TrackItem: React.FC<Props> = ({ trackNumber, name, time, id, link }) => {
   return (
     <Grid marginBottom={"20px"} size={{ xs: 12, sm: 12, md: 10, lg: 8 }}>
       <Grid style={{ width: "70%" }}>
-        <Card
-          component={Link}
-          to={"/tracks"}
-          style={{ textDecoration: "none" }}
-        >
+        <Card style={{ textDecoration: "none" }}>
           <CardContent
             style={{ display: "flex", padding: "10px", fontSize: "20px" }}
           >
@@ -65,7 +61,7 @@ const TrackItem: React.FC<Props> = ({ trackNumber, name, time, id, link }) => {
             </Typography>
             {user ? (
               <Link
-                to={link}
+                to={link? link: "#"}
                 onClick={() => onPlay(id)}
                 style={{ paddingTop: "4px", marginInline: "10px" }}
                 className={"tube"}

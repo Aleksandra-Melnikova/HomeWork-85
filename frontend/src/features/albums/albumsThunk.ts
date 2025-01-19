@@ -1,11 +1,11 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axiosApi from "../../axiosApi.ts";
-import { Album } from "../../types";
+import { AlbumNew } from "../../types";
 
-export const fetchAlbums = createAsyncThunk<Album[], string>(
+export const fetchAlbums = createAsyncThunk<AlbumNew[], string>(
   "albums/fetchAlbums",
   async (id) => {
-    const albumsResponse = await axiosApi<Album[]>("/albums?artist=" + id);
+    const albumsResponse = await axiosApi<AlbumNew[]>("/albums?artist=" + id);
     return albumsResponse.data || [];
   },
 );

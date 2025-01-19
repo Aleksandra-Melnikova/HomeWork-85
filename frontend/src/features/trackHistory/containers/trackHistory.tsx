@@ -18,14 +18,13 @@ const TrackHistory = () => {
   const user = useAppSelector(selectUser);
   const navigate = useNavigate();
 
-  if (user === null) {
-    navigate("/");
-  }
-
   useEffect(() => {
-    dispatch(fetchTrackHistory());
-  }, [dispatch]);
-  console.log(trackHistory);
+    if (user === null) {
+      navigate("/");
+    } else {
+      dispatch(fetchTrackHistory());
+    }
+  }, [dispatch, user]);
 
   return (
     <Grid container direction={"column"} spacing={2}>
@@ -46,11 +45,11 @@ const TrackHistory = () => {
           <CircularProgress />
         ) : (
           <>
-            {trackHistory?.length === 0 && !isFetchLoading ? (
+            {!trackHistory || (trackHistory.length === 0 && !isFetchLoading) ? (
               <Typography variant="h6">No tracks yet</Typography>
             ) : (
               <>
-                {trackHistory?.map((track) => (
+                {trackHistory.map((track) => (
                   <TrackHistoryItem
                     key={track._id}
                     id={track._id}

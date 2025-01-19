@@ -1,5 +1,5 @@
 import Grid from "@mui/material/Grid2";
-import { Card, CardContent, Typography } from "@mui/material";
+import { Box, Card, CardContent, Typography } from "@mui/material";
 import dayjs from "dayjs";
 
 interface Props {
@@ -18,14 +18,26 @@ const TrackHistoryItem: React.FC<Props> = ({ name, datetime, artistName }) => {
           <CardContent
             style={{ display: "flex", padding: "10px", fontSize: "20px" }}
           >
-            <Typography
-              display={"inline-block"}
-              variant={"h5"}
-              color="textPrimary"
-              component="p"
-            >
-              {name} of {artistName}
-            </Typography>
+            <Box>
+              {" "}
+              <Typography
+                display={"block"}
+                variant={"h5"}
+                color="textPrimary"
+                component="p"
+              >
+                {" "}
+                {name}
+              </Typography>
+              <Typography
+                display={"block"}
+                variant={"h5"}
+                color="secondary"
+                component="p"
+              >
+                {artistName}
+              </Typography>
+            </Box>
             <Typography
               marginLeft={"auto"}
               display={"inline-block"}

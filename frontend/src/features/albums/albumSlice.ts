@@ -1,10 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { fetchAlbums } from "./albumsThunk.ts";
 import { RootState } from "../../app/store.ts";
-import { Album } from "../../types";
+import { AlbumNew } from "../../types";
 
 interface IProductsState {
-  albums: Album[] | null;
+  albums: AlbumNew[] | null;
   fetchLoading: boolean;
 }
 

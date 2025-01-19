@@ -18,12 +18,15 @@ export interface TrackHistory {
   artistName: string;
 }
 
-export interface Album {
-  _id: string;
-  artist: ArtistInterface;
-  title: string;
-  year: number;
-  image: string | null;
+
+export interface AlbumNew {
+  album: {
+    _id: string;
+    artist: ArtistInterface;
+    title: string;
+    year: number;
+    image: string | null;
+  };
   trackNumber: number;
 }
 

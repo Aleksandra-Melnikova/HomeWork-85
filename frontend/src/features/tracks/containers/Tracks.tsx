@@ -18,6 +18,7 @@ const Tracks = () => {
   useEffect(() => {
     if (params) {
       dispatch(fetchTracks(params));
+    } else {
     }
   }, [dispatch]);
 

@@ -15,9 +15,10 @@ interface Props {
   year: number;
   id: string;
   image?: string | null | undefined;
+  tracks: number;
 }
 
-const AlbumItem: React.FC<Props> = ({ title, year, image, id }) => {
+const AlbumItem: React.FC<Props> = ({ title, year, image, id, tracks }) => {
   let productsImage = NoPictureImage;
 
   if (image) {
@@ -35,6 +36,9 @@ const AlbumItem: React.FC<Props> = ({ title, year, image, id }) => {
         <CardContent>
           <Typography variant="body2" color="textSecondary" component="p">
             Year:{year}
+          </Typography>
+          <Typography variant="body2" color="textSecondary" component="p">
+            Tracks:{tracks}
           </Typography>
         </CardContent>
         <CardMedia
