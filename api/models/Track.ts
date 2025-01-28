@@ -21,7 +21,11 @@ const TrackSchema = new mongoose.Schema({
     linkYouTube:{
         type: String,
         default: null,
-    }
+    },
+    isPublished: {
+        type: Boolean,
+        default: false,
+    },
 });
 
 const Track = mongoose.model("Track", TrackSchema);

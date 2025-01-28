@@ -4,6 +4,9 @@ import {imagesUpload} from "../multer";
 import {TrackInterfaceWithoutId} from "../types";
 import Track from "../models/Track";
 import Artist from "../models/Artist";
+import permit from "../middlewear/permit";
+import auth from "../middlewear/auth";
+
 const tracksRouter = express.Router();
 
 
@@ -50,7 +53,7 @@ tracksRouter.get('/', async (req, res, next) => {
     }
 });
 
-tracksRouter.post('/', imagesUpload.single('image'), async (req, res, next) => {
+tracksRouter.post('/', imagesUpload.single('image'), auth, permit('admin','user'), async (req, res, next) => {
     if (req.body.album) {
         const artist = await Album.findById(req.body.album);
         if (!artist) res.status(404).send({error:'Not Found album'});
@@ -73,5 +76,30 @@ tracksRouter.post('/', imagesUpload.single('image'), async (req, res, next) => {
     catch (e) {
         next(e);
     }
+});
+
+tracksRouter.delete('/:id', auth, permit("admin") ,async (req, res, next) => {
+    // let expressReq = req as RequestWithUser
+    // const user = expressReq.user;
+    const track = await Track.findById(req.params.id);
+    // if(!user){
+    //     res.status(404).send({error: 'No authorized'});
+    //     return;
+    // }
+
+    if (!track) {
+        res.status(404).send({error: 'Track not found'});
+    }
+
+        // else if(product.user.toString() !== user._id.toString()) {
+        //     res.status(403).send({error:"You are trying to delete someone else's product"});
+    // }
+    else{
+        try{
+            await Track.deleteOne({_id: req.params.id});
+            res.send({message: "Track deleted successfully."});
+        } catch(error){
+            next(error);
+        }}
 });
 export default tracksRouter;
