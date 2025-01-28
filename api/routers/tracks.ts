@@ -102,4 +102,26 @@ tracksRouter.delete('/:id', auth, permit("admin") ,async (req, res, next) => {
             next(error);
         }}
 });
+
+tracksRouter.patch('/:id/togglePublished', auth, permit("admin"), async (req, res, next) => {
+    try {
+        const track = await Track.findOne(
+            {_id: req.params.id}
+        );
+
+        if (!track) {
+            res.status(403).send({error: "Track not found"});
+            return;
+        }
+
+        const updateTrack = await Artist.findOneAndUpdate(
+            {_id: req.params.id},
+            {isPublished: !track.isPublished},
+            {new: true}
+        );
+        res.send(updateTrack);
+    } catch (e) {
+        next(e);
+    }
+});
 export default tracksRouter;
