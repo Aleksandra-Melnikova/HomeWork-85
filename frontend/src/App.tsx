@@ -7,8 +7,14 @@ import Albums from "./features/albums/containers/Albums.tsx";
 import LoginPage from "./features/users/LoginPage.tsx";
 import RegisrerPage from "./features/users/RegisrerPage.tsx";
 import TrackHistory from "./features/trackHistory/containers/trackHistory.tsx";
+import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute.tsx";
+import NewArtist from "./features/artists/containers/NewArtist.tsx";
+import {selectUser} from "./features/users/UserSlice.ts";
+import {useAppSelector} from "./app/hooks.ts";
 
 const App = () => {
+    const user = useAppSelector(selectUser);
+
   return (
     <>
       <CssBaseline />
@@ -22,6 +28,21 @@ const App = () => {
             <Route path="/" element={<Artists />} />
             <Route path="/register" element={<RegisrerPage />} />
             <Route path="/login" element={<LoginPage />} />
+              <Route path="/artists/new" element={(
+                  <ProtectedRoute isAllowed={user && (user.role ==="admin" || user.role ==="user")}>
+                      <NewArtist/>
+                  </ProtectedRoute>
+              )}/>
+              {/*<Route path="/products/new" element={(*/}
+              {/*    <ProtectedRoute isAllowed={user && user.role === 'admin'}>*/}
+              {/*        <NewProduct/>*/}
+              {/*    </ProtectedRoute>*/}
+              {/*)}/>*/}
+              {/*<Route path="/products/new" element={(*/}
+              {/*    <ProtectedRoute isAllowed={user && user.role === 'admin'}>*/}
+              {/*        <NewProduct/>*/}
+              {/*    </ProtectedRoute>*/}
+              {/*)}/>*/}
             <Route path="/artists" element={<Artists />} />
             <Route path="/albums" element={<Albums />} />
             <Route path="/tracks" element={<Tracks />} />

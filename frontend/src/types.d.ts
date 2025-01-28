@@ -1,7 +1,14 @@
 export interface Artist {
   _id: string;
   name: string;
-  image: string;
+  image: string | null;
+}
+
+export interface ArtistMutation {
+  name: string;
+  description: string;
+  image: string | null;
+  isPublished: boolean;
 }
 
 export interface TrackHistory {
@@ -84,6 +91,7 @@ export interface User {
   _id: string;
   username: string;
   token: string;
+  role: string;
 }
 
 export interface TrackHistoryPost {

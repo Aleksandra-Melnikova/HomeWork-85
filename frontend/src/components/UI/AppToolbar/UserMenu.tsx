@@ -4,6 +4,7 @@ import { User } from "../../../types";
 import { unsetUser } from "../../../features/users/UserSlice.ts";
 import { useAppDispatch } from "../../../app/hooks.ts";
 import { logout } from "../../../features/users/UserThunk.ts";
+import {NavLink} from "react-router-dom";
 
 interface Props {
   user: User;
@@ -38,6 +39,7 @@ const UserMenu: React.FC<Props> = ({ user }) => {
       >
         <MenuItem>Profile</MenuItem>
         <MenuItem>My account</MenuItem>
+          <MenuItem component={NavLink} to={"/artists/new"}>Add Artist</MenuItem>
         <MenuItem onClick={HandleLogout}>Logout</MenuItem>
       </Menu>
     </>

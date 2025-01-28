@@ -4,10 +4,11 @@ import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import { persistor, store } from "./app/store.ts";
 import { PersistGate } from "redux-persist/integration/react";
+import {addInterceptors} from "./axiosApi.ts";
+import {ToastContainer} from "react-toastify";
 
-function ToastContainer() {
-  return null;
-}
+
+addInterceptors(store);
 
 createRoot(document.getElementById("root")!).render(
   <Provider store={store}>
