@@ -114,7 +114,7 @@ tracksRouter.patch('/:id/togglePublished', auth, permit("admin"), async (req, re
             return;
         }
 
-        const updateTrack = await Artist.findOneAndUpdate(
+        const updateTrack = await Track.findOneAndUpdate(
             {_id: req.params.id},
             {isPublished: !track.isPublished},
             {new: true}
