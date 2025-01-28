@@ -25,13 +25,13 @@ const run = async () => {
             username: "Maria",
             password: "123",
             token: randomUUID(),
-            role: "admin",
+            role: 'admin',
         },
         {
             username: "Ivan",
             password: "123",
             token: randomUUID(),
-            role: "user",
+            role: 'user',
         });
 
     const [zhukovArtist, gagarinaArtist, NoizeMCArtist] = await Artist.create({

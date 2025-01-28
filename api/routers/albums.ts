@@ -112,13 +112,14 @@ albumsRouter.delete('/:id', auth, permit("admin") ,async (req, res, next) => {
         else{
             try{
             await Album.deleteOne({_id: req.params.id});
+            await Track.deleteMany({album: album._id});
             res.send({message: "Album deleted successfully."});
         } catch(error){
         next(error);
     }}
 });
 
-albumsRouter.patch('/:id/togglePublished', auth, permit("admin"), async (req, res, next) => {
+albumsRouter.patch('/:id/togglePublished', auth, permit('admin'), async (req, res, next) => {
 
     try {
         const album = await Album.findOne(

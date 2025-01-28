@@ -4,6 +4,8 @@ import {imagesUpload} from "../multer";
 import {ArtistInterfaceWithoutId} from "../types";
 import permit from "../middlewear/permit";
 import auth from "../middlewear/auth";
+import Album from "../models/Album";
+import Track from "../models/Track";
 
 
 const artistsRouter = express.Router();
@@ -17,7 +19,7 @@ res.send(artists);
     }
 });
 
-artistsRouter.post('/',imagesUpload.single('image'),permit('admin','user'), async (req, res, next) => {
+artistsRouter.post('/',imagesUpload.single('image'), auth ,permit('admin','user'), async (req, res, next) => {
     const artistsData: ArtistInterfaceWithoutId = {
         name: req.body.name,
         description: req.body.description,
@@ -45,6 +47,7 @@ artistsRouter.delete('/:id', auth, permit("admin") ,async (req, res, next) => {
 
     if (!artist) {
         res.status(404).send({error: 'Artist not found'});
+        return
     }
 
         // else if(product.user.toString() !== user._id.toString()) {
@@ -52,8 +55,13 @@ artistsRouter.delete('/:id', auth, permit("admin") ,async (req, res, next) => {
     // }
     else{
         try{
+            const albumsNew = await Album.find({artist: artist._id});
             await Artist.deleteOne({_id: req.params.id});
-            res.send({message: "Artist deleted successfully."});
+            await Album.deleteMany({artist: artist._id});
+            for(let i=0; i<albumsNew.length; i++){
+                await Track.deleteMany({album: albumsNew[i]._id});
+            }
+            res.send({message: "Artist, his albums and his tracks deleted successfully."});
         } catch(error){
             next(error);
         }}
