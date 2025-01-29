@@ -12,13 +12,13 @@ export const fetchArtists = createAsyncThunk<Artist[], void>(
 
 export const createArtist = createAsyncThunk<void, ArtistMutation>(
     "artists/createArtist",
-    async (productMutation) => {
+    async (ArtistMutation) => {
         const formData = new FormData();
 
-        const keys = Object.keys(productMutation) as (keyof ArtistMutation)[];
+        const keys = Object.keys(ArtistMutation) as (keyof ArtistMutation)[];
 
         keys.forEach((key) => {
-            const value = productMutation[key] ;
+            const value = ArtistMutation[key] ;
 
             if (value !== null) {
                 formData.append(key, value as string | File);

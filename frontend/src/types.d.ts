@@ -11,6 +11,17 @@ export interface ArtistMutation {
   isPublished: boolean;
 }
 
+export interface  Album {
+  _id: string;
+  artist: ArtistInterface;
+  title: string;
+  year: number;
+  image: string | null;
+}
+
+
+export type AlbumMutation= Omit<Album, '_id'>
+
 export interface TrackHistory {
   _id: string;
   user: User;

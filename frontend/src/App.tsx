@@ -11,6 +11,7 @@ import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute.tsx";
 import NewArtist from "./features/artists/containers/NewArtist.tsx";
 import {selectUser} from "./features/users/UserSlice.ts";
 import {useAppSelector} from "./app/hooks.ts";
+import NewAlbum from "./features/albums/containers/NewAlbum.tsx";
 
 const App = () => {
     const user = useAppSelector(selectUser);
@@ -33,11 +34,11 @@ const App = () => {
                       <NewArtist/>
                   </ProtectedRoute>
               )}/>
-              {/*<Route path="/products/new" element={(*/}
-              {/*    <ProtectedRoute isAllowed={user && user.role === 'admin'}>*/}
-              {/*        <NewProduct/>*/}
-              {/*    </ProtectedRoute>*/}
-              {/*)}/>*/}
+              <Route path="/albums/new" element={(
+                  <ProtectedRoute isAllowed={user && (user.role ==="admin" || user.role ==="user")}>
+                      <NewAlbum/>
+                  </ProtectedRoute>
+              )}/>
               {/*<Route path="/products/new" element={(*/}
               {/*    <ProtectedRoute isAllowed={user && user.role === 'admin'}>*/}
               {/*        <NewProduct/>*/}

@@ -1,21 +1,26 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchAlbums } from "./albumsThunk.ts";
+import {createAlbum, fetchAlbums} from "./albumsThunk.ts";
 import { RootState } from "../../app/store.ts";
 import { AlbumNew } from "../../types";
+import {createArtist} from "../artists/artistsThunk.ts";
 
 interface IProductsState {
   albums: AlbumNew[] | null;
   fetchLoading: boolean;
+  createAlbumLoading: boolean;
 }
 
 const initialState: IProductsState = {
   albums: null,
   fetchLoading: false,
+  createAlbumLoading: false,
 };
 
 export const selectAlbums = (state: RootState) => state.albums.albums;
 export const selectFetchLoading = (state: RootState) =>
   state.albums.fetchLoading;
+export const selectCreateAlbumLoading = (state: RootState) =>
+    state.albums. createAlbumLoading;
 
 export const albumSlice = createSlice({
   name: "albums",
@@ -32,7 +37,16 @@ export const albumSlice = createSlice({
       })
       .addCase(fetchAlbums.rejected, (state) => {
         state.fetchLoading = false;
-      });
+      })
+  .addCase(createAlbum.pending, (state) => {
+      state.createAlbumLoading = true;
+    })
+        .addCase(createArtist.fulfilled, (state) => {
+          state.createAlbumLoading = false;
+        })
+        .addCase(createArtist.rejected, (state) => {
+          state.createAlbumLoading = false;
+        });
   },
 });
 

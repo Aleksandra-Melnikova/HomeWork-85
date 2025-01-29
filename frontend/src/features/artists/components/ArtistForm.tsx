@@ -23,7 +23,6 @@ const ArtistForm: React.FC<Props> = ({ onSubmit }) => {
 
   const submitFormHandler = (e: FormEvent) => {
     e.preventDefault();
-    console.log(form.name.trim().length);
       if(form.name.trim().length === 0) {
           toast.error("Name is required");
       }

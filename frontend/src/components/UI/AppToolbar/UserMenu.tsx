@@ -37,8 +37,8 @@ const UserMenu: React.FC<Props> = ({ user }) => {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <MenuItem>Profile</MenuItem>
-        <MenuItem>My account</MenuItem>
+
+        <MenuItem component={NavLink} to={"/albums/new"}>Add Album</MenuItem>
           <MenuItem component={NavLink} to={"/artists/new"}>Add Artist</MenuItem>
         <MenuItem onClick={HandleLogout}>Logout</MenuItem>
       </Menu>
