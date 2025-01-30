@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axiosApi from "../../axiosApi.ts";
-import {AlbumMutation, AlbumNew} from "../../types";
+import { Album, AlbumMutation, AlbumNew } from "../../types";
 
 export const fetchAlbums = createAsyncThunk<AlbumNew[], string>(
   "albums/fetchAlbums",
@@ -10,21 +10,29 @@ export const fetchAlbums = createAsyncThunk<AlbumNew[], string>(
   },
 );
 
+export const fetchAllAlbums = createAsyncThunk<Album[], void>(
+  "albums/fetchAllAlbums",
+  async () => {
+    const albumsResponse = await axiosApi<Album[]>("/albums");
+    return albumsResponse.data || [];
+  },
+);
+
 export const createAlbum = createAsyncThunk<void, AlbumMutation>(
-    "albums/fetchAlbum",
-    async (AlbumMutation) => {
-        const formData = new FormData();
+  "albums/fetchAlbum",
+  async (AlbumMutation) => {
+    const formData = new FormData();
 
-        const keys = Object.keys(AlbumMutation) as (keyof AlbumMutation)[];
+    const keys = Object.keys(AlbumMutation) as (keyof AlbumMutation)[];
 
-        keys.forEach((key) => {
-            const value = AlbumMutation[key] ;
+    keys.forEach((key) => {
+      const value = AlbumMutation[key];
 
-            if (value !== null) {
-                formData.append(key, value as string | File);
-            }
-        });
+      if (value !== null) {
+        formData.append(key, value as string | File);
+      }
+    });
 
-        await axiosApi.post("/albums", formData);
-    },
+    await axiosApi.post("/albums", formData);
+  },
 );

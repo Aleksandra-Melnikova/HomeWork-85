@@ -4,9 +4,8 @@ import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import { persistor, store } from "./app/store.ts";
 import { PersistGate } from "redux-persist/integration/react";
-import {addInterceptors} from "./axiosApi.ts";
-import {ToastContainer} from "react-toastify";
-
+import { addInterceptors } from "./axiosApi.ts";
+import { ToastContainer } from "react-toastify";
 
 addInterceptors(store);
 

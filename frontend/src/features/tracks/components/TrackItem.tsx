@@ -61,7 +61,7 @@ const TrackItem: React.FC<Props> = ({ trackNumber, name, time, id, link }) => {
             </Typography>
             {user ? (
               <Link
-                to={link? link: "#"}
+                to={link ? link : "#"}
                 onClick={() => onPlay(id)}
                 style={{ paddingTop: "4px", marginInline: "10px" }}
                 className={"tube"}

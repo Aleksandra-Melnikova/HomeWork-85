@@ -11,7 +11,7 @@ export interface ArtistMutation {
   isPublished: boolean;
 }
 
-export interface  Album {
+export interface Album {
   _id: string;
   artist: ArtistInterface;
   title: string;
@@ -19,8 +19,7 @@ export interface  Album {
   image: string | null;
 }
 
-
-export type AlbumMutation= Omit<Album, '_id'>
+export type AlbumMutation = Omit<Album, "_id">;
 
 export interface TrackHistory {
   _id: string;
@@ -35,7 +34,6 @@ export interface TrackHistory {
   datetime: string;
   artistName: string;
 }
-
 
 export interface AlbumNew {
   album: {
@@ -65,6 +63,15 @@ export interface Track {
     image: string | null;
   };
   artist: Artist;
+}
+
+export interface TrackInterfaceWithoutID {
+  album: string;
+  name: string;
+  time: string;
+  trackNumber: number;
+  isPublished: boolean;
+  linkYouTube: null | string;
 }
 
 export interface RegisterResponse {

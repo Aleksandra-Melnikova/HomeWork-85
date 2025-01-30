@@ -4,7 +4,7 @@ import { User } from "../../../types";
 import { unsetUser } from "../../../features/users/UserSlice.ts";
 import { useAppDispatch } from "../../../app/hooks.ts";
 import { logout } from "../../../features/users/UserThunk.ts";
-import {NavLink} from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 interface Props {
   user: User;
@@ -37,9 +37,15 @@ const UserMenu: React.FC<Props> = ({ user }) => {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-
-        <MenuItem component={NavLink} to={"/albums/new"}>Add Album</MenuItem>
-          <MenuItem component={NavLink} to={"/artists/new"}>Add Artist</MenuItem>
+        <MenuItem component={NavLink} to={"/albums/new"}>
+          Add Album
+        </MenuItem>
+        <MenuItem component={NavLink} to={"/artists/new"}>
+          Add Artist
+        </MenuItem>
+        <MenuItem component={NavLink} to={"/tracks/new"}>
+          Add Track
+        </MenuItem>
         <MenuItem onClick={HandleLogout}>Logout</MenuItem>
       </Menu>
     </>

@@ -4,9 +4,8 @@ import { toast } from "react-toastify";
 import { CircularProgress } from "@mui/material";
 import ArtistForm from "../components/ArtistForm.tsx";
 import { selectCreateLoading } from "../artistSlice.ts";
-import {ArtistMutation} from "../../../types";
-import {createArtist} from "../artistsThunk.ts";
-
+import { ArtistMutation } from "../../../types";
+import { createArtist } from "../artistsThunk.ts";
 
 const NewArtist = () => {
   const dispatch = useAppDispatch();

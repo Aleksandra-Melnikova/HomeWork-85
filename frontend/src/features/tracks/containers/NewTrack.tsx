@@ -2,20 +2,21 @@ import { useAppDispatch, useAppSelector } from "../../../app/hooks.ts";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { CircularProgress } from "@mui/material";
-import { AlbumMutation } from "../../../types";
-import AlbumForm from "../components/AlbumForm.tsx";
-import { selectCreateAlbumLoading } from "../albumSlice.ts";
-import { createAlbum } from "../albumsThunk.ts";
+import { TrackInterfaceWithoutID } from "../../../types";
+import AlbumForm from "../components/TrackForm.tsx";
 
-const NewArtist = () => {
+import { createTrack } from "../tracksThunk.ts";
+import { selectCreateTrackLoading } from "../trackSlice.ts";
+
+const NewTrack = () => {
   const dispatch = useAppDispatch();
-  const isCreateLoading = useAppSelector(selectCreateAlbumLoading);
+  const isCreateLoading = useAppSelector(selectCreateTrackLoading);
   const navigate = useNavigate();
 
-  const onSubmitForm = async (album: AlbumMutation) => {
+  const onSubmitForm = async (track: TrackInterfaceWithoutID) => {
     try {
-      await dispatch(createAlbum(album)).unwrap();
-      toast.success("Album was successfully created!");
+      await dispatch(createTrack(track)).unwrap();
+      toast.success("Track was successfully created!");
       navigate("/artists");
     } catch (e) {
       console.log(e);
@@ -33,4 +34,4 @@ const NewArtist = () => {
   );
 };
 
-export default NewArtist;
+export default NewTrack;
