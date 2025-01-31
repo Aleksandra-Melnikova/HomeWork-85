@@ -94,21 +94,10 @@ albumsRouter.post('/', imagesUpload.single('image'), auth, permit('admin','user'
 });
 
 albumsRouter.delete('/:id', auth, permit("admin") ,async (req, res, next) => {
-        // let expressReq = req as RequestWithUser
-        // const user = expressReq.user;
         const album = await Album.findById(req.params.id);
-        // if(!user){
-        //     res.status(404).send({error: 'No authorized'});
-        //     return;
-        // }
-
         if (!album) {
             res.status(404).send({error: 'Album not found'});
         }
-
-        // else if(product.user.toString() !== user._id.toString()) {
-        //     res.status(403).send({error:"You are trying to delete someone else's product"});
-        // }
         else{
             try{
             await Album.deleteOne({_id: req.params.id});

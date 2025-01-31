@@ -6,6 +6,7 @@ import tracksRouter from "./routers/tracks";
 import usersRouter from "./routers/users";
 import trackHistoryRouter from "./routers/track_history";
 import cors from "cors";
+import AdminRouter from "./routers/admin";
 
 
 const app = express();
@@ -21,6 +22,7 @@ app.use('/albums', albumsRouter);
 app.use('/tracks', tracksRouter);
 app.use('/users', usersRouter);
 app.use('/track_history', trackHistoryRouter);
+app.use('/admin', AdminRouter);
 
 
 

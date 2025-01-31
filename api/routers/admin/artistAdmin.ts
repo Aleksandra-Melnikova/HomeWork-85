@@ -1,25 +1,26 @@
+
 import express from "express";
-import Artist from "../models/Artist";
-import {imagesUpload} from "../multer";
-import {ArtistInterfaceWithoutId} from "../types";
-import permit from "../middlewear/permit";
-import auth from "../middlewear/auth";
-import Album from "../models/Album";
-import Track from "../models/Track";
+import {imagesUpload} from "../../multer";
+import auth from "../../middlewear/auth";
+import permit from "../../middlewear/permit";
+import {ArtistInterfaceWithoutId} from "../../types";
+import Artist from "../../models/Artist";
+import Album from "../../models/Album";
+import Track from "../../models/Track";
 
 
-const artistsRouter = express.Router();
+const artistsAdminRouter = express.Router();
 
-artistsRouter.get('/', async (req, res, next) => {
+artistsAdminRouter.get('/', async (req, res, next) => {
     try {
-const artists = await Artist.find();
-res.send(artists);
+        const artists = await Artist.find();
+        res.send(artists);
     } catch (e) {
         next(e);
     }
 });
 
-artistsRouter.post('/',imagesUpload.single('image'), auth ,permit('admin','user'), async (req, res, next) => {
+artistsAdminRouter.post('/',imagesUpload.single('image'),  async (req, res, next) => {
     const artistsData: ArtistInterfaceWithoutId = {
         name: req.body.name,
         description: req.body.description,
@@ -36,7 +37,7 @@ artistsRouter.post('/',imagesUpload.single('image'), auth ,permit('admin','user'
 
 
 
-artistsRouter.delete('/:id', auth, permit("admin") ,async (req, res, next) => {
+artistsAdminRouter.delete('/:id' ,async (req, res, next) => {
     const artist = await Artist.findById(req.params.id);
 
     if (!artist) {
@@ -58,7 +59,7 @@ artistsRouter.delete('/:id', auth, permit("admin") ,async (req, res, next) => {
         }}
 });
 
-artistsRouter.patch('/:id/togglePublished', auth, permit("admin"), async (req, res, next) => {
+artistsAdminRouter.patch('/:id/togglePublished', async (req, res, next) => {
 
     try {
         const artist = await Artist.findOne(
@@ -81,4 +82,4 @@ artistsRouter.patch('/:id/togglePublished', auth, permit("admin"), async (req, r
     }
 });
 
-export default artistsRouter;
+export default artistsAdminRouter;
