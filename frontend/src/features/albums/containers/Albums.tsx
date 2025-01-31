@@ -49,7 +49,7 @@ const Albums = () => {
               <>
                 {albums?.map((album) => (
                   <AlbumItem
-                      isPublished={album.album.isPublished}
+                    isPublished={album.album.isPublished}
                     key={album.album._id}
                     id={album.album._id}
                     title={album.album.title}

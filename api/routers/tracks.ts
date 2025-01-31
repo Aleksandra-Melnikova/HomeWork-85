@@ -78,50 +78,5 @@ tracksRouter.post('/', imagesUpload.single('image'), auth, permit('admin','user'
     }
 });
 
-tracksRouter.delete('/:id', auth, permit("admin") ,async (req, res, next) => {
-    // let expressReq = req as RequestWithUser
-    // const user = expressReq.user;
-    const track = await Track.findById(req.params.id);
-    // if(!user){
-    //     res.status(404).send({error: 'No authorized'});
-    //     return;
-    // }
 
-    if (!track) {
-        res.status(404).send({error: 'Track not found'});
-    }
-
-        // else if(product.user.toString() !== user._id.toString()) {
-        //     res.status(403).send({error:"You are trying to delete someone else's product"});
-    // }
-    else{
-        try{
-            await Track.deleteOne({_id: req.params.id});
-            res.send({message: "Track deleted successfully."});
-        } catch(error){
-            next(error);
-        }}
-});
-
-tracksRouter.patch('/:id/togglePublished', auth, permit("admin"), async (req, res, next) => {
-    try {
-        const track = await Track.findOne(
-            {_id: req.params.id}
-        );
-
-        if (!track) {
-            res.status(403).send({error: "Track not found"});
-            return;
-        }
-
-        const updateTrack = await Track.findOneAndUpdate(
-            {_id: req.params.id},
-            {isPublished: !track.isPublished},
-            {new: true}
-        );
-        res.send(updateTrack);
-    } catch (e) {
-        next(e);
-    }
-});
 export default tracksRouter;

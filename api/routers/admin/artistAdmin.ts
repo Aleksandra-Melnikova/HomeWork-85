@@ -1,8 +1,7 @@
 
 import express from "express";
 import {imagesUpload} from "../../multer";
-import auth from "../../middlewear/auth";
-import permit from "../../middlewear/permit";
+
 import {ArtistInterfaceWithoutId} from "../../types";
 import Artist from "../../models/Artist";
 import Album from "../../models/Album";

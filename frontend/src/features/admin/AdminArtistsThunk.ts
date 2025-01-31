@@ -10,21 +10,16 @@ export const fetchAdminArtists = createAsyncThunk<Artist[], void>(
   },
 );
 
-// export const createArtist = createAsyncThunk<void, ArtistMutation>(
-//   "artists/createArtist",
-//   async (ArtistMutation) => {
-//     const formData = new FormData();
-//
-//     const keys = Object.keys(ArtistMutation) as (keyof ArtistMutation)[];
-//
-//     keys.forEach((key) => {
-//       const value = ArtistMutation[key];
-//
-//       if (value !== null) {
-//         formData.append(key, value as string | File);
-//       }
-//     });
-//
-//     await axiosApi.post("/artists", formData);
-//   },
-// );
+export const deleteAdminArtist = createAsyncThunk<void, string>(
+  "admin/artists/deleteAdminArtist",
+  async (id) => {
+    return axiosApi.delete(`/artists/${id}`, {});
+  },
+);
+
+export const publishAdminArtist = createAsyncThunk<void, string>(
+  "admin/artists/publishAdminArtist",
+  async (id) => {
+    return axiosApi.patch(`/artists/${id}/togglePublished`, {});
+  },
+);

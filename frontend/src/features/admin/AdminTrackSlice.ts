@@ -1,25 +1,29 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../../app/store.ts";
-import {TrackAdmin} from "../../types";
-import {fetchAdminTracks} from "./AdminTracksThunk.ts";
+import { TrackAdmin } from "../../types";
+import {
+  deleteAdminTrack,
+  fetchAdminTracks,
+  publishAdminTrack,
+} from "./AdminTracksThunk.ts";
 
 interface ITrackState {
   tracks: TrackAdmin[] | null;
   fetchLoading: boolean;
   createTrackLoading: boolean;
+  deleteAdminLoading: boolean;
+  publishAdminLoading: boolean;
 }
 
 const initialState: ITrackState = {
   tracks: null,
   fetchLoading: false,
   createTrackLoading: false,
+  deleteAdminLoading: false,
+  publishAdminLoading: false,
 };
 
 export const selectAdminTracks = (state: RootState) => state.adminTracks.tracks;
-// export const selectFetchLoading = (state: RootState) =>
-//   state.tracks.fetchLoading;
-// export const selectCreateTrackLoading = (state: RootState) =>
-//   state.tracks.createTrackLoading;
 
 export const adminTrackSlice = createSlice({
   name: "admin/tracks",
@@ -38,15 +42,24 @@ export const adminTrackSlice = createSlice({
       .addCase(fetchAdminTracks.rejected, (state) => {
         state.fetchLoading = false;
       })
-      // .addCase(createTrack.pending, (state) => {
-      //   state.createTrackLoading = true;
-      // })
-      // .addCase(createTrack.fulfilled, (state) => {
-      //   state.createTrackLoading = false;
-      // })
-      // .addCase(createTrack.rejected, (state) => {
-      //   state.createTrackLoading = false;
-      // });
+      .addCase(deleteAdminTrack.pending, (state) => {
+        state.deleteAdminLoading = true;
+      })
+      .addCase(deleteAdminTrack.fulfilled, (state) => {
+        state.deleteAdminLoading = false;
+      })
+      .addCase(deleteAdminTrack.rejected, (state) => {
+        state.deleteAdminLoading = false;
+      })
+      .addCase(publishAdminTrack.pending, (state) => {
+        state.publishAdminLoading = true;
+      })
+      .addCase(publishAdminTrack.fulfilled, (state) => {
+        state.publishAdminLoading = false;
+      })
+      .addCase(publishAdminTrack.rejected, (state) => {
+        state.publishAdminLoading = false;
+      });
   },
 });
 

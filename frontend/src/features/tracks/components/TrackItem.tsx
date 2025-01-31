@@ -1,5 +1,5 @@
 import Grid from "@mui/material/Grid2";
-import {Button, Card, CardContent, Typography} from "@mui/material";
+import { Card, CardContent, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks.ts";
 import { selectUser } from "../../users/UserSlice.ts";
@@ -18,7 +18,14 @@ interface Props {
   isPublished: boolean;
 }
 
-const TrackItem: React.FC<Props> = ({ trackNumber, name, time, id, link, isPublished }) => {
+const TrackItem: React.FC<Props> = ({
+  trackNumber,
+  name,
+  time,
+  id,
+  link,
+  isPublished,
+}) => {
   const user = useAppSelector(selectUser);
   const dispatch = useAppDispatch();
   const error = useAppSelector(selectCreateError);
@@ -37,63 +44,51 @@ const TrackItem: React.FC<Props> = ({ trackNumber, name, time, id, link, isPubli
   };
 
   return (
-      <div  style={{display: "flex", alignItems: "flex-start", width: "100%"}}>
-    <Grid marginBottom={"20px"} size={{ xs: 12, sm: 12, md: 10, lg: 8 }}>
-      <Grid style={{ width: "70%" }}>
-        <Card style={{ textDecoration: "none" }}>
-          <CardContent
-            style={{ display: "flex", padding: "10px", fontSize: "20px" }}
-          >
-            <Typography
-              display={"inline-block"}
-              variant={"h5"}
-              color="textPrimary"
-              component="p"
-            >
-              {trackNumber}. {name}
-            </Typography>
-            <Typography
-              marginLeft={"auto"}
-              display={"inline-block"}
-              variant="h6"
-              color="textSecondary"
-              component="p"
-            >
-              {time}
-            </Typography>
-            {user ? (
-              <Link
-                to={link ? link : "#"}
-                onClick={() => onPlay(id)}
-                style={{ paddingTop: "4px", marginInline: "10px" }}
-                className={"tube"}
-              >
-                <PlayArrowIcon fontSize={"medium"} />
-              </Link>
-            ) : null}
-          </CardContent>
-
-        </Card>
-
-      </Grid>
-
-    </Grid>
-        {user && user.role === 'admin' && (
-            <div style={{ marginTop: "20px",  marginRight: "auto" }}>
-              <Button   color="primary"  variant={"contained"}>
-                Delete
-              </Button>
-            </div>
-        )}
-
-        {user && user.role === 'admin' && !isPublished  && (
-            <div style={{ marginTop: "20px",  marginRight: "auto" }}>
-              <Button   color="primary"  variant={"contained"}>
-                Publish
-              </Button>
-            </div>
-        )}
-      </div>
+    <>
+      {!isPublished ? null : (
+        <div
+          style={{ display: "flex", alignItems: "flex-start", width: "100%" }}
+        >
+          <Grid marginBottom={"20px"} size={{ xs: 12, sm: 12, md: 10, lg: 8 }}>
+            <Grid style={{ width: "70%" }}>
+              <Card style={{ textDecoration: "none" }}>
+                <CardContent
+                  style={{ display: "flex", padding: "10px", fontSize: "20px" }}
+                >
+                  <Typography
+                    display={"inline-block"}
+                    variant={"h5"}
+                    color="textPrimary"
+                    component="p"
+                  >
+                    {trackNumber}. {name}
+                  </Typography>
+                  <Typography
+                    marginLeft={"auto"}
+                    display={"inline-block"}
+                    variant="h6"
+                    color="textSecondary"
+                    component="p"
+                  >
+                    {time}
+                  </Typography>
+                  {user ? (
+                    <Link
+                      to={link ? link : "#"}
+                      onClick={() => onPlay(id)}
+                      style={{ paddingTop: "4px", marginInline: "10px" }}
+                      className={"tube"}
+                    >
+                      <PlayArrowIcon fontSize={"medium"} />
+                    </Link>
+                  ) : null}
+                </CardContent>
+              </Card>
+            </Grid>
+          </Grid>
+        </div>
+      )}
+    </>
   );
 };
 

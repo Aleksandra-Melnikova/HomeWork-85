@@ -93,42 +93,5 @@ albumsRouter.post('/', imagesUpload.single('image'), auth, permit('admin','user'
     }
 });
 
-albumsRouter.delete('/:id', auth, permit("admin") ,async (req, res, next) => {
-        const album = await Album.findById(req.params.id);
-        if (!album) {
-            res.status(404).send({error: 'Album not found'});
-        }
-        else{
-            try{
-            await Album.deleteOne({_id: req.params.id});
-            await Track.deleteMany({album: album._id});
-            res.send({message: "Album deleted successfully."});
-        } catch(error){
-        next(error);
-    }}
-});
-
-albumsRouter.patch('/:id/togglePublished', auth, permit('admin'), async (req, res, next) => {
-
-    try {
-        const album = await Album.findOne(
-            {_id: req.params.id}
-        );
-
-        if (!album) {
-            res.status(403).send({error: "Album not found"});
-            return;
-        }
-
-        const updateAlbum = await Album.findOneAndUpdate(
-            {_id: req.params.id},
-            {isPublished: !album.isPublished},
-            {new: true}
-        );
-        res.send(updateAlbum);
-    } catch (e) {
-        next(e);
-    }
-});
 
 export default albumsRouter;

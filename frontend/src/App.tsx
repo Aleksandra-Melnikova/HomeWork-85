@@ -74,14 +74,18 @@ const App = () => {
             <Route path="/albums" element={<Albums />} />
             <Route path="/tracks" element={<Tracks />} />
             <Route path="/trackHistory" element={<TrackHistory />} />
-              <Route path={'/admin'} element={<ProtectedRoute   isAllowed={
-                  user && (user.role === "admin")
-              }><AdminLayout/></ProtectedRoute>
-              }>
-                  <Route path= "artists" element={<AdminArtistList/>}/>
-                  <Route path= "albums" element={<AdminAlbumsList/>}/>
-                  <Route path= "tracks" element={<AdminTracksList/>}/>
-              </Route>
+            <Route
+              path={"/admin"}
+              element={
+                <ProtectedRoute isAllowed={user && user.role === "admin"}>
+                  <AdminLayout />
+                </ProtectedRoute>
+              }
+            >
+              <Route path="artists" element={<AdminArtistList />} />
+              <Route path="albums" element={<AdminAlbumsList />} />
+              <Route path="tracks" element={<AdminTracksList />} />
+            </Route>
             <Route path="*" element={<h1>Not found</h1>} />
           </Routes>
         </Container>

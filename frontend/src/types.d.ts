@@ -69,14 +69,14 @@ export interface Track {
   artist: Artist;
 }
 export interface TrackAdmin {
-    _id: string;
-    album: AlbumInterface;
-    name: string;
-    time: string;
-    trackNumber: number;
-    linkYouTube: string;
-    isPublished: boolean;
-  }
+  _id: string;
+  album: AlbumInterface;
+  name: string;
+  time: string;
+  trackNumber: number;
+  linkYouTube: string;
+  isPublished: boolean;
+}
 
 export interface TrackInterfaceWithoutID {
   album: string;

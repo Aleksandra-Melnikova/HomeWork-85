@@ -41,7 +41,7 @@ export const albumSlice = createSlice({
       })
       .addCase(fetchAlbums.fulfilled, (state, { payload: albums }) => {
         state.fetchLoading = false;
-         state.albums = albums;
+        state.albums = albums;
       })
       .addCase(fetchAlbums.rejected, (state) => {
         state.fetchLoading = false;

@@ -1,10 +1,9 @@
 import express from "express";
 import Album from "../../models/Album";
-import Artist from "../../models/Artist";
 import Track from "../../models/Track";
 import {imagesUpload} from "../../multer";
 import {TrackInterfaceWithoutId} from "../../types";
-import artist from "../../models/Artist";
+
 
 const tracksAdminRouter = express.Router();
 
@@ -43,22 +42,11 @@ tracksAdminRouter .post('/', imagesUpload.single('image'), async (req, res, next
     }
 });
 
-tracksAdminRouter .delete('/:id' ,async (req, res, next) => {
-    // let expressReq = req as RequestWithUser
-    // const user = expressReq.user;
+tracksAdminRouter.delete('/:id' ,async (req, res, next) => {
     const track = await Track.findById(req.params.id);
-    // if(!user){
-    //     res.status(404).send({error: 'No authorized'});
-    //     return;
-    // }
-
     if (!track) {
         res.status(404).send({error: 'Track not found'});
     }
-
-        // else if(product.user.toString() !== user._id.toString()) {
-        //     res.status(403).send({error:"You are trying to delete someone else's product"});
-    // }
     else{
         try{
             await Track.deleteOne({_id: req.params.id});
@@ -68,7 +56,7 @@ tracksAdminRouter .delete('/:id' ,async (req, res, next) => {
         }}
 });
 
-tracksAdminRouter .patch('/:id/togglePublished', async (req, res, next) => {
+tracksAdminRouter.patch('/:id/togglePublished', async (req, res, next) => {
     try {
         const track = await Track.findOne(
             {_id: req.params.id}
