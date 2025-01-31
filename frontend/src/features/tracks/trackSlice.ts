@@ -29,6 +29,7 @@ export const trackSlice = createSlice({
     builder
       .addCase(fetchTracks.pending, (state) => {
         state.fetchLoading = true;
+        state.tracks = null;
       })
       .addCase(fetchTracks.fulfilled, (state, { payload: tracks }) => {
         state.fetchLoading = false;

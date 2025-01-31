@@ -4,7 +4,7 @@ import { User } from "../../../types";
 import { unsetUser } from "../../../features/users/UserSlice.ts";
 import { useAppDispatch } from "../../../app/hooks.ts";
 import { logout } from "../../../features/users/UserThunk.ts";
-import { NavLink } from "react-router-dom";
+import {NavLink, useNavigate} from "react-router-dom";
 
 interface Props {
   user: User;
@@ -16,6 +16,7 @@ const UserMenu: React.FC<Props> = ({ user }) => {
     setAnchorEl(event.currentTarget);
   };
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const handleClose = () => {
     setAnchorEl(null);
@@ -46,6 +47,11 @@ const UserMenu: React.FC<Props> = ({ user }) => {
         <MenuItem component={NavLink} to={"/tracks/new"}>
           Add Track
         </MenuItem>
+        {user && user.role === 'admin' && ( <MenuItem onClick={()=> {navigate("/admin/artists");setAnchorEl(null)}} component={NavLink} to={"/admin"}>
+          Admin
+        </MenuItem>)
+        }
+
         <MenuItem onClick={HandleLogout}>Logout</MenuItem>
       </Menu>
     </>

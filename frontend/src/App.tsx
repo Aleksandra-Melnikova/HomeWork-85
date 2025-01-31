@@ -13,6 +13,10 @@ import { selectUser } from "./features/users/UserSlice.ts";
 import { useAppSelector } from "./app/hooks.ts";
 import NewAlbum from "./features/albums/containers/NewAlbum.tsx";
 import NewTrack from "./features/tracks/containers/NewTrack.tsx";
+import AdminLayout from "./features/admin/AdminLayout.tsx";
+import AdminArtistList from "./features/admin/AdminArtistList.tsx";
+import AdminAlbumsList from "./features/admin/AdminAlbumsList.tsx";
+import AdminTracksList from "./features/admin/AdminTracksList.tsx";
 
 const App = () => {
   const user = useAppSelector(selectUser);
@@ -70,6 +74,14 @@ const App = () => {
             <Route path="/albums" element={<Albums />} />
             <Route path="/tracks" element={<Tracks />} />
             <Route path="/trackHistory" element={<TrackHistory />} />
+              <Route path={'/admin'} element={<ProtectedRoute   isAllowed={
+                  user && (user.role === "admin")
+              }><AdminLayout/></ProtectedRoute>
+              }>
+                  <Route path= "artists" element={<AdminArtistList/>}/>
+                  <Route path= "albums" element={<AdminAlbumsList/>}/>
+                  <Route path= "tracks" element={<AdminTracksList/>}/>
+              </Route>
             <Route path="*" element={<h1>Not found</h1>} />
           </Routes>
         </Container>

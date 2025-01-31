@@ -44,11 +44,12 @@ const Albums = () => {
         ) : (
           <>
             {!albums || (albums?.length === 0 && !isFetchLoading) ? (
-              <Typography variant="h6">No artists yet</Typography>
+              <Typography variant="h6">No albums yet</Typography>
             ) : (
               <>
                 {albums?.map((album) => (
                   <AlbumItem
+                      isPublished={album.album.isPublished}
                     key={album.album._id}
                     id={album.album._id}
                     title={album.album.title}

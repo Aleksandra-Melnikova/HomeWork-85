@@ -37,10 +37,11 @@ export const albumSlice = createSlice({
     builder
       .addCase(fetchAlbums.pending, (state) => {
         state.fetchLoading = true;
+        state.albums = null;
       })
       .addCase(fetchAlbums.fulfilled, (state, { payload: albums }) => {
         state.fetchLoading = false;
-        if (albums) state.albums = albums;
+         state.albums = albums;
       })
       .addCase(fetchAlbums.rejected, (state) => {
         state.fetchLoading = false;

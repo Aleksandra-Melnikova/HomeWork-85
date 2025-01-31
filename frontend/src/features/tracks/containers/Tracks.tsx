@@ -26,12 +26,13 @@ const Tracks = () => {
     <Grid container direction={"column"} spacing={2}>
       <Grid container justifyContent="space-between" alignItems="center">
         <Grid>
-          <Typography
-            style={{ marginLeft: "30px", marginTop: "20px" }}
-            variant="h4"
+          {!tracks?   <Typography variant="h6">No tracks yet</Typography>:  <Typography
+              style={{ marginLeft: "30px", marginTop: "20px" }}
+              variant="h4"
           >
             Albums {tracks?.album.title} of {tracks?.artist.name}{" "}
-          </Typography>
+          </Typography>}
+
         </Grid>
       </Grid>
 
@@ -46,6 +47,7 @@ const Tracks = () => {
               <>
                 {tracks?.tracks.map((track) => (
                   <TrackItem
+                      isPublished={track.isPublished}
                     key={track._id}
                     id={track._id}
                     time={track.time}

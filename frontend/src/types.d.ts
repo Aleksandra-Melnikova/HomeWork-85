@@ -2,6 +2,7 @@ export interface Artist {
   _id: string;
   name: string;
   image: string | null;
+  isPublished: boolean;
 }
 
 export interface ArtistMutation {
@@ -17,6 +18,7 @@ export interface Album {
   title: string;
   year: number;
   image: string | null;
+  isPublished: boolean;
 }
 
 export type AlbumMutation = Omit<Album, "_id">;
@@ -42,6 +44,7 @@ export interface AlbumNew {
     title: string;
     year: number;
     image: string | null;
+    isPublished: boolean;
   };
   trackNumber: number;
 }
@@ -54,6 +57,7 @@ export interface Track {
     time: string;
     trackNumber: number;
     linkYouTube: string;
+    isPublished: boolean;
   }[];
   album: {
     _id: string;
@@ -64,6 +68,15 @@ export interface Track {
   };
   artist: Artist;
 }
+export interface TrackAdmin {
+    _id: string;
+    album: AlbumInterface;
+    name: string;
+    time: string;
+    trackNumber: number;
+    linkYouTube: string;
+    isPublished: boolean;
+  }
 
 export interface TrackInterfaceWithoutID {
   album: string;

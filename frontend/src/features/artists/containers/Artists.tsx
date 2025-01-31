@@ -40,6 +40,7 @@ const Artists = () => {
               <>
                 {artists.map((artist) => (
                   <ArtistItem
+                      isPublished={artist.isPublished}
                     key={artist._id}
                     id={artist._id}
                     name={artist.name}
