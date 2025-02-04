@@ -15,6 +15,7 @@ const Artists = () => {
     dispatch(fetchArtists());
   }, [dispatch]);
 
+
   return (
     <Grid container direction={"column"} spacing={2}>
       <Grid container justifyContent="space-between" alignItems="center">
