@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks.ts";
 import {
   deleteAdminAlbums,
@@ -15,17 +15,18 @@ import { NavLink } from "react-router-dom";
 
 const AdminAlbumsList = () => {
   const dispatch = useAppDispatch();
-  useEffect(() => {
+
+  const fetchAllAlbums = useCallback(() => {
     dispatch(fetchAdminAllAlbums());
   }, [dispatch]);
-
-  const fetchAllAlbums = () => {
-    dispatch(fetchAdminAllAlbums());
-  };
 
   useEffect(() => {
     void fetchAllAlbums();
-  }, [dispatch]);
+  }, [dispatch, fetchAllAlbums]);
+
+  useEffect(() => {
+    void fetchAllAlbums();
+  }, [dispatch, fetchAllAlbums]);
   const deleteAlbum = async (id: string) => {
     await dispatch(deleteAdminAlbums(id));
     void fetchAllAlbums();

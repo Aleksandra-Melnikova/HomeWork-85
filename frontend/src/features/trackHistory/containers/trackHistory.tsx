@@ -24,7 +24,7 @@ const TrackHistory = () => {
     } else {
       dispatch(fetchTrackHistory());
     }
-  }, [dispatch, user]);
+  }, [dispatch, user, navigate]);
 
   return (
     <Grid container direction={"column"} spacing={2}>

@@ -20,7 +20,7 @@ const Albums = () => {
     if (params) {
       dispatch(fetchAlbums(params));
     }
-  }, [dispatch]);
+  }, [dispatch, params]);
 
   return (
     <Grid container direction={"column"} spacing={2}>

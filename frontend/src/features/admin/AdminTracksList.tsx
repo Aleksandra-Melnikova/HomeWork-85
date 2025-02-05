@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks.ts";
 import Grid from "@mui/material/Grid2";
 import { TrackAdmin } from "../../types";
@@ -15,13 +15,14 @@ import { NavLink } from "react-router-dom";
 
 const AdminTracksList = () => {
   const dispatch = useAppDispatch();
-  const fetchAllTracks = async () => {
-    await dispatch(fetchAdminTracks());
-  };
+
+  const fetchAllTracks = useCallback(() => {
+    dispatch(fetchAdminTracks());
+  }, [dispatch]);
 
   useEffect(() => {
     void fetchAllTracks();
-  }, [dispatch]);
+  }, [dispatch, fetchAllTracks]);
 
   const deleteTrack = async (id: string) => {
     await dispatch(deleteAdminTrack(id));

@@ -19,7 +19,7 @@ const Tracks = () => {
     if (params) {
       dispatch(fetchTracks(params));
     }
-  }, [dispatch]);
+  }, [dispatch, params]);
 
   return (
     <Grid container direction={"column"} spacing={2}>

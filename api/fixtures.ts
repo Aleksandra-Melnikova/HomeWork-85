@@ -16,7 +16,7 @@ const run = async () => {
     await db.dropCollection("tracks");
     await db.dropCollection("users");
   } catch (e) {
-    console.log("Collections were not presents, skipping drop");
+    console.log(e, "Collections were not presents, skipping drop");
   }
 
   await User.create(
@@ -25,14 +25,14 @@ const run = async () => {
       password: "123",
       token: randomUUID(),
       role: "admin",
-      displayName: 'Maria'
+      displayName: "Maria",
     },
     {
       username: "Ivan",
       password: "123",
       token: randomUUID(),
       role: "user",
-      displayName: 'Ivan'
+      displayName: "Ivan",
     },
   );
 

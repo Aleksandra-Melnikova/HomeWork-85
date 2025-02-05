@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks.ts";
 import Grid from "@mui/material/Grid2";
 import { Artist } from "../../types";
@@ -20,13 +20,13 @@ const AdminArtistList = () => {
     dispatch(fetchAdminArtists());
   }, [dispatch]);
 
-  const fetchAllArtist = async () => {
+  const fetchAllArtist = useCallback(async () => {
     await dispatch(fetchAdminArtists());
-  };
+  }, [dispatch]);
 
   useEffect(() => {
     void fetchAllArtist();
-  }, [dispatch]);
+  }, [dispatch, fetchAllArtist]);
 
   const deleteArtist = async (id: string) => {
     await dispatch(deleteAdminArtist(id));
