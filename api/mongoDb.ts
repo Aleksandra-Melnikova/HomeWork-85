@@ -3,18 +3,18 @@ let db: Db;
 let client: MongoClient;
 
 const connect = async () => {
-    client = await MongoClient.connect('mongodb://localhost');
-    db = client.db('spotify');
+  client = await MongoClient.connect("mongodb://localhost");
+  db = client.db("spotify");
 };
 
 const disconnect = async () => {
-    await client.close();
-}
+  await client.close();
+};
 
 const mongoDb = {
-    connect,
-    disconnect,
-    getDb: () => db
+  connect,
+  disconnect,
+  getDb: () => db,
 };
 
 export default mongoDb;

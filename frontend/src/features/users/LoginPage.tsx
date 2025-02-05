@@ -14,9 +14,9 @@ import {
 import LockOpenIcon from "@mui/icons-material/LockOpen";
 import Grid from "@mui/material/Grid2";
 import { useAppDispatch, useAppSelector } from "../../app/hooks.ts";
-import {googleLogin, login} from "./UserThunk.ts";
+import { googleLogin, login } from "./UserThunk.ts";
 import { selectLoginError } from "./UserSlice.ts";
-import {GoogleLogin} from "@react-oauth/google";
+import { GoogleLogin } from "@react-oauth/google";
 
 const Register = () => {
   const [form, setForm] = useState<RegisterMutation>({
@@ -45,7 +45,7 @@ const Register = () => {
 
   const googleLoginHandler = async (credential: string) => {
     await dispatch(googleLogin(credential)).unwrap();
-    navigate('/');
+    navigate("/");
   };
 
   return (
@@ -70,17 +70,16 @@ const Register = () => {
           </Alert>
         ) : null}
 
-
         <Box sx={{ pt: 2 }}>
           <GoogleLogin
-              onSuccess={(credentialResponse) => {
-                if (credentialResponse.credential) {
-                  void googleLoginHandler(credentialResponse.credential);
-                }
-              }}
-              onError={() => {
-                console.log('Login Failed');
-              }}
+            onSuccess={(credentialResponse) => {
+              if (credentialResponse.credential) {
+                void googleLoginHandler(credentialResponse.credential);
+              }
+            }}
+            onError={() => {
+              console.log("Login Failed");
+            }}
           />
         </Box>
 

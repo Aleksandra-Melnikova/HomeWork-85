@@ -5,20 +5,31 @@
   "scripts": {
     "build": "tsc writeFile.ts",
     "dev": "nodemon index.ts",
-    "sead": "ts-node fixtures.ts"
+    "sead": "ts-node fixtures.ts",
+    "lint": "eslint .",
+    "lint-fix": "eslint . --fix",
+    "preview": "vite preview",
+    "format:check": "npx prettier . --check",
+    "format": "npx prettier . --write"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@eslint/js": "^9.19.0",
     "bcrypt": "^5.1.1",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
+    "eslint-js": "github:eslint/js",
+    "eslint-plugin-react-hooks": "^5.1.0",
+    "eslint-plugin-react-refresh": "^0.4.18",
     "express": "^4.21.2",
     "google-auth-library": "^9.15.1",
     "mongoose": "^8.9.2",
-    "multer": "^1.4.5-lts.1"
+    "multer": "^1.4.5-lts.1",
+    "prettier": "^3.4.2",
+    "typescript-eslint": "^8.23.0"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",
@@ -27,6 +38,7 @@
     "@types/express": "^5.0.0",
     "@types/multer": "^1.4.12",
     "@types/node": "^22.10.2",
+    "eslint-plugin-react": "^7.37.4",
     "nodemon": "^3.1.9",
     "ts-node": "^10.9.2",
     "typescript": "^5.7.2"

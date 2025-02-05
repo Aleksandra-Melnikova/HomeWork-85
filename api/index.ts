@@ -8,32 +8,26 @@ import trackHistoryRouter from "./routers/track_history";
 import cors from "cors";
 import AdminRouter from "./routers/admin";
 
-
 const app = express();
 const port = 8000;
 
 app.use(express.json());
-app.use(express.static('public'));
+app.use(express.static("public"));
 app.use(cors());
 
-
-app.use('/artists', artistsRouter);
-app.use('/albums', albumsRouter);
-app.use('/tracks', tracksRouter);
-app.use('/users', usersRouter);
-app.use('/track_history', trackHistoryRouter);
-app.use('/admin', AdminRouter);
-
-
+app.use("/artists", artistsRouter);
+app.use("/albums", albumsRouter);
+app.use("/tracks", tracksRouter);
+app.use("/users", usersRouter);
+app.use("/track_history", trackHistoryRouter);
+app.use("/admin", AdminRouter);
 
 const run = async () => {
-await mongoose.connect('mongodb://localhost/spotify');
+  await mongoose.connect("mongodb://localhost/spotify");
 
-    app.listen(port, () => {
-        console.log(`Server started on port http://localhost:${port}`);
-    });
+  app.listen(port, () => {
+    console.log(`Server started on port http://localhost:${port}`);
+  });
 };
 
-run().catch(err => console.log(err));
-
-
+run().catch((err) => console.log(err));
